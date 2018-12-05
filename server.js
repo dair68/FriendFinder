@@ -8,7 +8,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //html routes
-app.get("/survey", function())
+//app.get("/survey", function())
 
 //listener
 app.listen(PORT, function () {
