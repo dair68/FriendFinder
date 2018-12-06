@@ -176,8 +176,8 @@
         });
 
         friend.scores = scores;
-
         console.log(friend);
+
         //sending survey results to server
         $.post("/api/friends", friend)
             .then(function (data) {
