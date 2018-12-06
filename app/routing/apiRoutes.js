@@ -1,7 +1,7 @@
 var friends = require("../data/friends");
 
 module.exports = function (app, path) {
-    console.log("setting up api routes");
+    //console.log("setting up api routes");
 
     //displays JSON of all possible friends
     app.get("/api/friends", function (req, res) {
