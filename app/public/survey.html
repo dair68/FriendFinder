@@ -145,7 +145,28 @@
                         </select>
                     </div><br>
                 </div>
-                <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+                <button type="button" class="btn btn-primary" id="submit" data-toggle="modal" data-target="#exampleModal">Submit</button>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Your best match</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <h1 id="match"></h1>
+                                <div id="portrait-container"></div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
         </section>
         <hr>
@@ -154,13 +175,16 @@
                 Repo</a>
         </span>
     </div>
+
+
 </body>
 <!-- <script src="survey.js"></script> -->
 
 <script>
     //submit button
     $("#submit").on("click", function (event) {
-        //event.preventDefault();
+        event.preventDefault();
+        $('#exampleModal').modal('hide');
         console.log("submit button clicked");
 
         var friend = {
@@ -179,9 +203,22 @@
         console.log(friend);
 
         //sending survey results to server
-        $.post("/api/friends", friend)
-            .then(function (data) {
-                console.log("sent survey response to server");
+        $.post("/api/friends", friend, function(data) {
+                //console.log("sent survey response to server");
+                console.log(data);
+
+                var bestMatch = data.name;
+                var photo = data.photo;
+
+                //console.log(bestMatch);
+
+                //displaying best match in a modal
+                $("#match").text(bestMatch);
+
+                var image = "<img src='" + photo + "' class='img-fluid' alt='your best match'>";
+                $("#portrait-container").append(image);
+
+                //$('#exampleModal').modal('show')
             });
     });
 

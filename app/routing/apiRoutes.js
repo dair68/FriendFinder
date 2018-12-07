@@ -33,16 +33,16 @@ module.exports = function (app, path) {
             }
         }
 
-        console.log(scoreDifferences);
-        console.log(minDifference);
-        console.log(best);
+        //console.log(scoreDifferences);
+        //console.log(minDifference);
+        //console.log(best);
 
         //adding newest person to friend data
         friends.push(friend);
 
         //displaying friends
         console.log("friend added");
-
-        return best;
+        
+        res.json(best);
     });
 }
